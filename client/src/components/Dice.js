@@ -9,18 +9,20 @@ import d6 from '../images/d6.png';
 
 const images = { d1, d2, d3, d4, d5, d6 }
 const styles = {
-  dice: { marginLeft: '20px' }
+  dice: { marginLeft: '20px', cursor: 'pointer' },
+  selected: { borderBottom: 'solid 2px blue' }
 }
 
-const Dice = ( { value } ) => (
+const Dice = ( { value, index, kept, toggleKept } ) => (
   <Grid.Column
     textAlign='center'
     width={ 3 }
   >
     <Image
-      style={ styles.dice }
+      style={ kept ? { ...styles.dice, ...styles.selected } : styles.dice }
       src={ images[`d${ value }`] }
       alt={ `dice value ${ value }` }
+      onClick={ () => toggleKept( index ) }
     />
   </Grid.Column>
 )
