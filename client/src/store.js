@@ -1,12 +1,17 @@
-import { creteStore, compose, applyMiddleware } from 'redux';
-import applyMiddleware from 'redux-devise-axios';
+import {
+  createStore,
+  compose,
+  applyMiddleware
+} from 'redux';
+import apiMiddleware from 'redux-devise-axios';
 import axios from 'axios';
 import rootReducer from './reducers/index';
+import thunk from 'redux-thunk';
 
 const options = { axios };
 
 const enhancers = compose(
-  applyMiddleware( thunk, applyMiddleware( options ) ),
+  applyMiddleware( thunk, apiMiddleware( options ) ),
   window.devToolsExtension ?
     window.devToolsExtension() : f => f
 )
@@ -20,4 +25,4 @@ if ( module.hot ) {
   } )
 }
 
-export default store
+export default store;
