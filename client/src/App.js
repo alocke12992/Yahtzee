@@ -1,13 +1,14 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom';
-import Game from './components/Game'
+import Game from './components/Game';
+import Scores from './components/Scores';
 import {
   ProtectedRoute,
   Login,
   Register,
   NavBar,
   FetchUser,
-} from '@devpoint/dps-react-kit'
+} from '@devpoint/dps-react-kit';
 import {
   login,
   register,
@@ -24,6 +25,11 @@ const App = () => (
           exact
           path="/"
           component={ Game }
+        />
+        <ProtectedRoute
+          exact
+          path="/scores"
+          component={ Scores }
         />
         <Route
           exact
