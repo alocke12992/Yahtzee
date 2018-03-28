@@ -1,9 +1,9 @@
 import {
   ROLL_DICE,
   TOGGLE_KEPT,
+  UPDATE_SCORE,
+  RESET_ROLL,
 } from '../actions/currentGame';
-
-//1 - 6's add total dice of that value
 
 const scores = [
   { section: 'upper', name: 'Ones', score: null, value: 1 },
@@ -14,23 +14,35 @@ const scores = [
   { section: 'upper', name: 'Sixes', score: null, value: 6 },
   { section: 'lower', name: 'Three Of A Kind', score: null, addAll: true },
   { section: 'lower', name: 'Four Of A Kind', score: null, addAll: true },
-  { section: 'lower', name: 'Chance', score: null, addAll: true },
   { section: 'lower', name: 'Full House', score: null },
   { section: 'lower', name: 'Low Straight', score: null },
   { section: 'lower', name: 'High Straight', score: null },
-  { section: 'lower', name: 'Yahtzee', score: null }
+  { section: 'lower', name: 'Yahtzee', score: null },
+  { section: 'lower', name: 'Chance', score: null, addAll: true },
 ]
 
 const currentGame = (
   state = {
     roll: 0,
-    dice: [...new Array( 5 )],
+    dice: [...new Array(5)],
     keep: [],
     scores,
   },
   action
 ) => {
-  switch ( action.type ) {
+  switch (action.type) {
+    case RESET_ROLL:
+      return {
+        ...state,
+        roll: 0,
+        dice: [...new Array(5)],
+        keep: []
+      }
+    case UPDATE_SCORE:
+      return {
+        ...state,
+        scores: action.scores
+      }
     case ROLL_DICE:
       return {
         ...state,
